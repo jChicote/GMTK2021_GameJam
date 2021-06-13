@@ -22,7 +22,7 @@ namespace GMTK2021.Weapons
             timer.TickTimer();
             if (!timer.CheckTimeIsUp()) return;
 
-            GameObject projectileInstance = Instantiate(projectile, firingPoint.position, Quaternion.identity);
+            GameObject projectileInstance = Instantiate(projectile, firingPoint.position, firingPoint.rotation);
 
             timer.ResetTimer();
         }

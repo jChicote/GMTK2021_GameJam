@@ -95,10 +95,8 @@ namespace GMTK2021.Player
         private bool CheckIsGrounded()
         {
             // Returns true if the raycast touches the ground
-            Debug.DrawRay(footPosition.position, -Vector3.up, Color.blue, 1f);
             if (Physics.Raycast(footPosition.position, Vector3.down, out hit, 0.5f))
             {
-                print(hit.distance);
                 animController.SetBool("isJumping", false);
                 return true;
             }

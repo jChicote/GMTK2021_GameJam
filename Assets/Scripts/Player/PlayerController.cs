@@ -16,6 +16,7 @@ namespace GMTK2021.Player
         {
             InitialiseInputSystem();
             InitialiseMovementSystem();
+            InitialiseWeaponSystem();
         }
 
         private void InitialiseInputSystem()
@@ -28,6 +29,12 @@ namespace GMTK2021.Player
         {
             IPlayerMovement playerMovement = this.GetComponent<IPlayerMovement>();
             playerMovement.initialiseMovement();
+        }
+
+        private void InitialiseWeaponSystem()
+        {
+            IPlayerWeaponControl weaponControl = this.GetComponent<IPlayerWeaponControl>();
+            weaponControl.InitialiseWeapons();
         }
     }
 }

@@ -9,12 +9,15 @@ namespace GMTK2021.Weapons
         void InitialiseWeapon();
         void FireWeapon();
         void ReloadWeapon();
+        void MoveWeaponToTransform(Transform newTransform);
+        WeaponIKTargets GetIKTargets();
     }
 
     public class Weapon : MonoBehaviour, IWeapon, IPausible
     {
         public Transform firingPoint;
         public GameObject projectile;
+        public WeaponIKTargets ikTargets;
 
         protected bool isPaused = false;
 
@@ -23,6 +26,18 @@ namespace GMTK2021.Weapons
         public virtual void FireWeapon() { }
 
         public virtual void ReloadWeapon() { }
+
+        public virtual void MoveWeaponToTransform(Transform newTransform)
+        {
+            transform.parent = newTransform;
+            transform.localPosition = Vector3.zero;
+            transform.localRotation = Quaternion.identity;
+        }
+
+        public WeaponIKTargets GetIKTargets()
+        {
+            return ikTargets;
+        }
 
         public void Pause()
         {
@@ -33,5 +48,12 @@ namespace GMTK2021.Weapons
         {
             isPaused = false;
         }
+    }
+
+    [System.Serializable]
+    public struct WeaponIKTargets
+    {
+        public Transform leftHand;
+        public Transform rightHand;
     }
 }

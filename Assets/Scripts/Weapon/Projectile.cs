@@ -4,15 +4,22 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public Rigidbody projectileRB;
+    public float speed;
+
+    private void Awake()
     {
-        
+        projectileRB = this.GetComponent<Rigidbody>();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void FixedUpdate()
     {
-        
+        projectileRB.velocity = transform.forward * speed;
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Player")) return;
+        Destroy(gameObject);
     }
 }
