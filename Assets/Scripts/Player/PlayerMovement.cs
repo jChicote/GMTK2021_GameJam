@@ -20,6 +20,7 @@ namespace GMTK2021.Player
         private Transform playerTransform;
         public Transform footPosition;
         private Rigidbody playerRB;
+
         private Vector3 movementVector;
         private Vector3 currentMovement;
         private Vector3 verticalMovement;
@@ -27,6 +28,9 @@ namespace GMTK2021.Player
         private Vector3 rightVector;
         private Vector3 currentRotation;
         private Quaternion playerRotation;
+
+        private float forwardDot = 0;
+        private float rightDot = 0;
 
         private bool isPaused = false;
         private bool isGrounded = false;
@@ -61,13 +65,14 @@ namespace GMTK2021.Player
         private void SetMovement()
         {
             isGrounded = CheckIsGrounded();
+            animController.SetBool("isGrounded", isGrounded);
             forwardVector = DetermineMovmentSpeed() * movementVector.z * playerTransform.forward;
             rightVector = DetermineMovmentSpeed() * movementVector.x * playerTransform.right;
             currentMovement = forwardVector - -rightVector;
             currentMovement += verticalMovement;
             RunPlayerGravityCheck();
             controller.Move(currentMovement * Time.deltaTime);
-            AnimateMovemnetMagnitude();
+            AnimateMovement();
             print((currentMovement * Time.deltaTime).sqrMagnitude);
         }
 
@@ -94,6 +99,7 @@ namespace GMTK2021.Player
             if (Physics.Raycast(footPosition.position, Vector3.down, out hit, 0.5f))
             {
                 print(hit.distance);
+                animController.SetBool("isJumping", false);
                 return true;
             }
 
@@ -101,14 +107,12 @@ namespace GMTK2021.Player
             //return Physics.Raycast(footPosition.position, Vector3.down, out hit, 0.5f);
         }
 
-        private void AnimateMovemnetMagnitude()
+        private void AnimateMovement()
         {
-            float maxSqrMagnitude = runSpeed * runSpeed;
-            float val = forwardVector.sqrMagnitude / maxSqrMagnitude;
-            float rightVal = rightVector.sqrMagnitude / walkSpeed * walkSpeed;
-            animController.SetFloat("forwardBlend", val);
-            animController.SetFloat("rightBlend", rightVal);
-
+            forwardDot = Mathf.Lerp(forwardDot, Vector3.Dot(playerTransform.forward, currentMovement.normalized), 0.1f);
+            rightDot = Mathf.Lerp(rightDot, Vector3.Dot(playerTransform.right, currentMovement.normalized), 0.1f);
+            animController.SetFloat("forwardBlend", forwardDot * 2);
+            animController.SetFloat("rightBlend", rightDot * 2);
         }
 
         private void SetLookRotation()
@@ -136,12 +140,14 @@ namespace GMTK2021.Player
         public void SetMovementModeShift(bool state)
         {
             isModeShifting = state;
+            animController.SetBool("isModeShifting", isModeShifting);
         }
 
         public void TriggerJump()
         {
             if (!isGrounded) return;
             verticalMovement += jumpForce * Vector3.up;
+            animController.SetBool("isJumping", true);
         }
 
         public void Pause()

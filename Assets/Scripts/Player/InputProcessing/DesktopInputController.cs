@@ -13,12 +13,16 @@ namespace GMTK2021.Player.Input
     public class DesktopInputController : MonoBehaviour, IDesktopInputController, IPausible
     {
         private IPlayerMovement playerMovement;
+        private IPlayerWeaponControl playerWeapons;
+        private ICameraController cameraController;
 
         private bool isPaused = false;
 
         public void InitialiseInputController()
         {
             playerMovement = this.GetComponent<IPlayerMovement>();
+            playerWeapons = this.GetComponent<IPlayerWeaponControl>();
+            cameraController = this.GetComponent<ICameraController>();
         }
 
         private void OnMove(InputValue value)
@@ -43,9 +47,23 @@ namespace GMTK2021.Player.Input
             playerMovement.TriggerJump();
         }
 
+        private void OnAim(InputValue value)
+        {
+            if (isPaused) return;
+
+            if (value.isPressed)
+            {
+                cameraController.SwitchToAimCam();
+            } else
+            {
+                cameraController.SwitchToMainFollowCam();
+            }
+        }
+
         private void OnFire(InputValue value)
         {
             if (isPaused) return;
+            playerWeapons.FireWeapon();
         }
 
         private void OnModeShift(InputValue value)
@@ -53,6 +71,12 @@ namespace GMTK2021.Player.Input
             if (isPaused) return;
             print(value.isPressed);
             playerMovement.SetMovementModeShift(value.isPressed);
+        }
+
+        private void OnHolster(InputValue value)
+        {
+            if (isPaused) return;
+            playerWeapons.HolsterWeapon();
         }
 
         public void Pause()

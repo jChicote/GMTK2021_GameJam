@@ -30,10 +30,10 @@ namespace GMTK2021.Player
             playerMovement.initialiseMovement();
         }
     }
+}
 
-    public interface IPausible
-    {
-        void Pause();
-        void UnPause();
-    }
+public interface IPausible
+{
+    void Pause();
+    void UnPause();
 }
