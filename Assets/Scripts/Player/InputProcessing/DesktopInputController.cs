@@ -32,13 +32,27 @@ namespace GMTK2021.Player.Input
         {
             if (isPaused) return;
 
-            print(value.Get<Vector2>());
             playerMovement.SetLookInput(value.Get<Vector2>());
+        }
+
+        private void OnJump(InputValue value)
+        {
+            if (isPaused) return;
+            //if (!value.isPressed) return;
+            //print("triggered jump");
+            playerMovement.TriggerJump();
         }
 
         private void OnFire(InputValue value)
         {
             if (isPaused) return;
+        }
+
+        private void OnModeShift(InputValue value)
+        {
+            if (isPaused) return;
+            print(value.isPressed);
+            playerMovement.SetMovementModeShift(value.isPressed);
         }
 
         public void Pause()

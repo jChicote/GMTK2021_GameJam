@@ -1,11 +1,11 @@
 fileFormatVersion: 2
-guid: 1e98a219b512f6744b8a70de5b276252
+guid: 07f89f0179756bf48b60dc1160d66ae1
 ModelImporter:
   serializedVersion: 20200
   internalIDToNameTable:
   - first:
       74: -203655887218126122
-    second: Unarmed_Walking
+    second: Run Backwards
   externalObjects: {}
   materials:
     materialImportMode: 2
@@ -35,11 +35,11 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: Unarmed_Walking
+      name: Run Backwards
       takeName: mixamo.com
       internalID: 0
       firstFrame: 0
-      lastFrame: 31
+      lastFrame: 19
       wrapMode: 0
       orientationOffsetY: 0
       level: 0

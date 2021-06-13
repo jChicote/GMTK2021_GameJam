@@ -1,11 +1,11 @@
 fileFormatVersion: 2
-guid: 1e98a219b512f6744b8a70de5b276252
+guid: f13f79e20d546f74b90cb98fb2089c00
 ModelImporter:
   serializedVersion: 20200
   internalIDToNameTable:
   - first:
       74: -203655887218126122
-    second: Unarmed_Walking
+    second: Right_Strafe
   externalObjects: {}
   materials:
     materialImportMode: 2
@@ -35,7 +35,7 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: Unarmed_Walking
+      name: Right_Strafe
       takeName: mixamo.com
       internalID: 0
       firstFrame: 0
