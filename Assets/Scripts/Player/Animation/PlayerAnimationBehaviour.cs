@@ -26,5 +26,4 @@ namespace GMTK2021.Player
             }
         }
     }
-
 }

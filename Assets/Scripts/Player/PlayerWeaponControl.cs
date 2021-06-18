@@ -17,9 +17,11 @@ namespace GMTK2021.Player
 
     public class PlayerWeaponControl : MonoBehaviour, IPlayerWeaponControl, IPausible
     {
-        public Animator animControl;
-        public GameObject defaultBlaster;
+        // Inspector Accessible Fields
+        [SerializeField] private Animator animControl;
+        [SerializeField] private GameObject defaultBlaster;
 
+        // Interfaces
         private ITargetingSystem targetingSystem;
         private IWeaponRigHandler weaponRigHandler;
         public IWeapon weapon;
