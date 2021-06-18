@@ -21,21 +21,25 @@ namespace GMTK2021.Player
         public Transform cameraLookTarget;
         public float maximumTurnAngle = 40;
         public float inputSensitivity = 50;
-        public float speed;
+        public float aimInputSensitivity = 10f;
 
         private CinemachineVirtualCamera activeCamera;
         private Vector3 currentRotation = Vector3.zero;
+
+        private bool isAiming = false;
 
         public void SwitchToAimCam()
         {
             aimVirtualCamera.enabled = true;
             playerVirtualCam.enabled = false;
+            isAiming = true;
         }
 
         public void SwitchToMainFollowCam()
         {
             aimVirtualCamera.enabled = false;
             playerVirtualCam.enabled = true;
+            isAiming = false;
         }
 
         private void Update()
@@ -50,29 +54,21 @@ namespace GMTK2021.Player
 
         public void SetCameraVerticalOffset(float verticalOffset, float mouseSensitivity)
         {
-            //cameraLookTarget.Rotate(-verticalOffset * Time.deltaTime * 10, 0, 0);
-            //print(cameraLookTarget.localEulerAngles.x);
-
-            currentRotation.x += -verticalOffset * inputSensitivity; // * Time.deltaTime * 50;
+            currentRotation.x += -verticalOffset * (isAiming ? aimInputSensitivity : inputSensitivity);
             if (verticalOffset == 0) LerpToStop();
-            //print(cameraLookTarget.localEulerAngles);
-            //print(verticalOffset);
-            print(currentRotation.x);
             cameraLookTarget.Rotate(currentRotation.x, 0, 0);
 
             // constraint rotational axis to 360 degrees
-            //float modalAngle = (currentRotation.x > 180) ? currentRotation.x - 360 : currentRotation.x;
             if (cameraLookTarget.localEulerAngles.x > maximumTurnAngle && cameraLookTarget.localEulerAngles.x < (360 - maximumTurnAngle))
             {
                 currentRotation.x = 0;
                 cameraLookTarget.localEulerAngles = new Vector3(cameraLookTarget.localEulerAngles.x > 270 ? (360 - maximumTurnAngle) : maximumTurnAngle, 0, 0);
-
             }
         }
 
         private void LerpToStop()
         {
-            currentRotation.x = Mathf.Lerp(currentRotation.x, 0, 0.1f);
+            currentRotation.x = Mathf.Lerp(currentRotation.x, 0, 0.5f);
         }
     }
 }

@@ -296,11 +296,33 @@
                 },
                 {
                     "name": "",
+                    "id": "13cb406e-e7f8-4204-bfcf-1e5856ab7cd7",
+                    "path": "<Gamepad>/buttonSouth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "Jump",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "f9ecef7d-8aff-4f9d-9898-6dbf48f4eb4b",
                     "path": "<Keyboard>/shift",
                     "interactions": "Press(behavior=2)",
                     "processors": "",
                     "groups": "Keyboard&Mouse",
+                    "action": "ModeShift",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "55d07549-73bc-4baa-8268-11008b119448",
+                    "path": "<Gamepad>/leftStickPress",
+                    "interactions": "Press(behavior=2)",
+                    "processors": "",
+                    "groups": "Gamepad",
                     "action": "ModeShift",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -318,11 +340,33 @@
                 },
                 {
                     "name": "",
+                    "id": "fb69f0e0-81d2-4b49-9874-dd5a9e01ec17",
+                    "path": "<Gamepad>/buttonNorth",
+                    "interactions": "Hold",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "Holster",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "c99f46a2-b86b-4fe7-91d9-8c17d776057e",
                     "path": "<Mouse>/rightButton",
                     "interactions": "Press(behavior=2)",
                     "processors": "",
                     "groups": "Keyboard&Mouse",
+                    "action": "Aim",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "e1841199-8186-4027-9bae-ce095830a6c6",
+                    "path": "<Gamepad>/leftShoulder",
+                    "interactions": "Press(behavior=2)",
+                    "processors": "",
+                    "groups": "Gamepad",
                     "action": "Aim",
                     "isComposite": false,
                     "isPartOfComposite": false

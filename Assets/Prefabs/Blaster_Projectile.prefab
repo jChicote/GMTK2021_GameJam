@@ -61,7 +61,7 @@ SphereCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.16
+  m_Radius: 0.09
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &829089270243238731
 MonoBehaviour:
@@ -77,6 +77,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   projectileRB: {fileID: 158017956303029058}
   speed: 50
+  life: 5
 --- !u!1 &7097806905760521751
 GameObject:
   m_ObjectHideFlags: 0

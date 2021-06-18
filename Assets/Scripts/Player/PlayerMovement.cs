@@ -101,7 +101,6 @@ namespace GMTK2021.Player
         {
             currentMovement += gravity * Vector3.down * Time.fixedDeltaTime;
             verticalMovement += gravity * Vector3.down * Time.fixedDeltaTime; // The vertical upward force needs to decrease to sim smooth gravity!!!!!
-            //verticalMovement.y = Mathf.Clamp(verticalMovement.y, 0, jumpForce);
         }
 
         private bool CheckIsGrounded()
@@ -114,7 +113,6 @@ namespace GMTK2021.Player
             }
 
             return false;
-            //return Physics.Raycast(footPosition.position, Vector3.down, out hit, 0.5f);
         }
 
         private void AnimateMovement()
@@ -149,7 +147,6 @@ namespace GMTK2021.Player
         public void SetLookInput(Vector2 inputVector)
         {
             verticalLookOffset = inputVector.y;
-            //cameraController.SetCameraVerticalOffset(verticalLookOffset);
             currentRotation.y += inputVector.x * mouseSensitivity * Time.fixedDeltaTime;
             playerRotation = Quaternion.Euler(currentRotation);
         }

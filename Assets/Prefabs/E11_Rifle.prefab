@@ -92,7 +92,7 @@ MonoBehaviour:
   ikTargets:
     leftHand: {fileID: 578283265538086393}
     rightHand: {fileID: 6170342359801509444}
-  fireRate: 0.03
+  fireRate: 1
 --- !u!1 &1177677486054006365
 GameObject:
   m_ObjectHideFlags: 0
