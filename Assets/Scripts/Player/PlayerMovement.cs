@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Cinemachine;
 
 namespace GMTK2021.Player
 {
@@ -15,11 +16,14 @@ namespace GMTK2021.Player
 
     public class PlayerMovement : MonoBehaviour, IPlayerMovement, IPausible
     {
+        private ICameraController cameraController;
+
         public Animator animController;
         public CharacterController controller;
         private Transform playerTransform;
         public Transform footPosition;
         private Rigidbody playerRB;
+        public CinemachineBrain cameraBrain;
 
         private Vector3 movementVector;
         private Vector3 currentMovement;
@@ -29,6 +33,7 @@ namespace GMTK2021.Player
         private Vector3 currentRotation;
         private Quaternion playerRotation;
 
+        private float verticalLookOffset = 0;
         private float forwardDot = 0;
         private float rightDot = 0;
 
@@ -52,6 +57,7 @@ namespace GMTK2021.Player
             currentMovement = Vector3.zero;
             currentRotation = playerTransform.rotation.eulerAngles;
             playerRotation = Quaternion.Euler(Vector3.zero);
+            cameraController = GetComponent<ICameraController>();
         }
 
         public void FixedUpdate()
@@ -60,6 +66,7 @@ namespace GMTK2021.Player
 
             SetMovement();
             SetLookRotation();
+            ModifyCameraVerticalAimOffset();
         }
 
         private void SetMovement()
@@ -73,7 +80,6 @@ namespace GMTK2021.Player
             RunPlayerGravityCheck();
             controller.Move(currentMovement * Time.deltaTime);
             AnimateMovement();
-            print((currentMovement * Time.deltaTime).sqrMagnitude);
         }
 
         private void RunPlayerGravityCheck()
@@ -82,7 +88,13 @@ namespace GMTK2021.Player
             {
                 ApplyGravity();
                 return;
-            } 
+            }
+
+            if (verticalMovement.y < 0)
+            {
+                currentMovement.y = 0;
+                verticalMovement.y = 0;
+            }
         }
 
         private void ApplyGravity()
@@ -123,15 +135,22 @@ namespace GMTK2021.Player
             return isModeShifting ? runSpeed : walkSpeed;
         }
 
+        private void ModifyCameraVerticalAimOffset()
+        {
+            cameraController.SetCameraVerticalOffset(verticalLookOffset, mouseSensitivity);
+        }
+
         public void SetMovementInput(Vector2 inputVector)
         {
             animController.SetBool("isMoving", inputVector != Vector2.zero);
             movementVector = new Vector3(inputVector.x, 0, inputVector.y);
         }
 
-        public void SetLookInput(Vector2 inputVetor)
+        public void SetLookInput(Vector2 inputVector)
         {
-            currentRotation.y += inputVetor.x * mouseSensitivity * Time.fixedDeltaTime;
+            verticalLookOffset = inputVector.y;
+            //cameraController.SetCameraVerticalOffset(verticalLookOffset);
+            currentRotation.y += inputVector.x * mouseSensitivity * Time.fixedDeltaTime;
             playerRotation = Quaternion.Euler(currentRotation);
         }
 

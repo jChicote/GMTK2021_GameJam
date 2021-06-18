@@ -27,6 +27,11 @@ namespace GMTK2021.Weapons
 
         public virtual void ReloadWeapon() { }
 
+        private void Update()
+        {
+            //Debug.DrawLine(firingPoint.position, firingPoint.forward * 50f, Color.cyan);
+        }
+
         public virtual void MoveWeaponToTransform(Transform newTransform)
         {
             transform.parent = newTransform;

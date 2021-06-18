@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 158017956303029058}
   - component: {fileID: 4706204769601167748}
   - component: {fileID: 829089270243238731}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Blaster_Projectile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -89,7 +89,7 @@ GameObject:
   - component: {fileID: 1749092994136926454}
   - component: {fileID: 8624178951541247870}
   - component: {fileID: 7988340169761746042}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: model
   m_TagString: Untagged
   m_Icon: {fileID: 0}

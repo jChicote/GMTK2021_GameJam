@@ -9,6 +9,7 @@ namespace GMTK2021.Player
     {
         private void Awake()
         {
+            Cursor.visible = false;
             InitialisePlayerComponents();
         }
 
@@ -35,6 +36,9 @@ namespace GMTK2021.Player
         {
             IPlayerWeaponControl weaponControl = this.GetComponent<IPlayerWeaponControl>();
             weaponControl.InitialiseWeapons();
+
+            ITargetingSystem targetingSystem = this.GetComponent<ITargetingSystem>();
+            targetingSystem.RunTargetingSystem();
         }
     }
 }
