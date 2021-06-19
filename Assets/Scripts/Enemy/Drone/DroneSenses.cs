@@ -5,9 +5,10 @@ using UnityEngine;
 
 namespace GMTK2021.Enemy
 {
-    public interface IEnemySight
+    public interface IPerceptionSense
     {
-
+        void InitialiseSense();
+        void RunSense();
     }
 
     public interface IEnemyInterestMarkers
@@ -20,7 +21,7 @@ namespace GMTK2021.Enemy
         void InitialiseSenses();
     }
 
-    public class DroneSenses : MonoBehaviour, ISenses, IPausible, IEnemySight, IEnemyInterestMarkers
+    public class DroneSenses : MonoBehaviour, ISenses, IPausible, IEnemyInterestMarkers
     {
         public Transform[] pointsOfInterest;
         public Whisker[] whiskerPoints;
