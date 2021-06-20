@@ -33,13 +33,15 @@ namespace GMTK2021.Enemy
 
         protected override void IntialiseWeaponControl()
         {
-            base.IntialiseWeaponControl();
+            ITargeting targeting = this.GetComponent<ITargeting>();
+            targeting.InitialiseTargetingController();
         }
 
         protected void InitialiseSenses()
         {
             ISenses senses = this.GetComponent<ISenses>();
             senses.InitialiseSenses();
+            
         }
     }
 }
