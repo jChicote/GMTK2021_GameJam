@@ -6,6 +6,7 @@ namespace GMTK2021.Enemy
 {
     public interface ITargeting
     {
+        void InitialiseTargetingController();
         bool IsTargeting { get; set; }
     }
 
@@ -14,6 +15,8 @@ namespace GMTK2021.Enemy
         // Inspector Accessible Fields
         [SerializeField] private Transform mainTarget;
         [SerializeField] private Transform targetPointer;
+
+        private IEnemySight enemySight;
 
         // Fields
         private bool isPaused = false;
@@ -26,9 +29,15 @@ namespace GMTK2021.Enemy
             set { isTargetting = value; }
         }
 
+        public void InitialiseTargetingController()
+        {
+            enemySight = this.GetComponent<IEnemySight>();
+        }
+
         private void FixedUpdate()
         {
             if (isPaused) return;
+            if (!enemySight.IsPercievable) return;
             targetPointer.position = mainTarget.position;
         }
 

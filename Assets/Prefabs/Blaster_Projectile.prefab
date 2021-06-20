@@ -49,7 +49,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 1
   m_Constraints: 112
-  m_CollisionDetection: 3
+  m_CollisionDetection: 2
 --- !u!135 &4706204769601167748
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -75,6 +75,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00a45ce6069fbf245878987583f263f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  particlePrefab: {fileID: 6293596412788477387, guid: f187c0110d8de64459dfe34460403b06, type: 3}
   projectileRB: {fileID: 158017956303029058}
   speed: 50
   life: 5

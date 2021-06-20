@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour
 {
+    public GameObject particlePrefab;
     public Rigidbody projectileRB;
     public float speed;
     public float life;
@@ -42,9 +43,14 @@ public class Projectile : MonoBehaviour
         
         if (collision.gameObject.CompareTag("Enemy") || collision.gameObject.CompareTag("Interactive"))
         {
-            ApplyForce(collision);
+            //ApplyForce(collision);
         }
 
+        Quaternion directionRot = Quaternion.FromToRotation(Vector3.forward, collision.GetContact(0).normal);
+        ParticleSystem effect = Instantiate(particlePrefab, collision.GetContact(0).point, directionRot).GetComponent<ParticleSystem>();
+        effect.Play();
+
+        Destroy(effect.gameObject, 5);
         Destroy(gameObject);
     }
 }

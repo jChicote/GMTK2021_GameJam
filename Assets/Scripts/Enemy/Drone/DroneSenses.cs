@@ -5,9 +5,10 @@ using UnityEngine;
 
 namespace GMTK2021.Enemy
 {
-    public interface IEnemySight
+    public interface IPerceptionSense
     {
-
+        void InitialiseSense();
+        void RunSense();
     }
 
     public interface IEnemyInterestMarkers
@@ -20,7 +21,7 @@ namespace GMTK2021.Enemy
         void InitialiseSenses();
     }
 
-    public class DroneSenses : MonoBehaviour, ISenses, IPausible, IEnemySight, IEnemyInterestMarkers
+    public class DroneSenses : MonoBehaviour, ISenses, IPausible, IEnemyInterestMarkers
     {
         public Transform[] pointsOfInterest;
         public Whisker[] whiskerPoints;
@@ -28,6 +29,7 @@ namespace GMTK2021.Enemy
         public float repelStrength = 1;
 
         private IMovementController movementController;
+        private IPerceptionSense[] senses;
 
         private RaycastHit hitResult;
         private bool isPaused = false;
@@ -37,6 +39,7 @@ namespace GMTK2021.Enemy
         public void InitialiseSenses()
         {
             movementController = this.GetComponent<IMovementController>();
+            senses = this.GetComponents<IPerceptionSense>();
         }
 
         public Transform[] GetPointsOfInterest()
@@ -49,6 +52,10 @@ namespace GMTK2021.Enemy
             if (isPaused) return;
 
             ShootWhiskers();
+            foreach (IPerceptionSense sense in senses)
+            {
+                sense.RunSense();
+            }
         }
 
         // ------------------------------------------------------------

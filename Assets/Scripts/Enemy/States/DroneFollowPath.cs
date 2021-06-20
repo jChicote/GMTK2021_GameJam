@@ -26,7 +26,7 @@ namespace GMTK2021.Enemy.States
             pointsOfInterest = interestMarkers.GetPointsOfInterest();
             movementController = this.GetComponent<IMovementController>();
 
-            simpleTimer = new SimpleTimer(5, Time.deltaTime);
+            simpleTimer = new SimpleTimer(10, Time.deltaTime);
             droneTransform = transform;
             SelectPointOfInterest();
         }
