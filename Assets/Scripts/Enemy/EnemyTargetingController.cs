@@ -8,6 +8,7 @@ namespace GMTK2021.Enemy
     {
         void InitialiseTargetingController();
         bool IsTargeting { get; set; }
+        Transform Target { get; }
     }
 
     public class EnemyTargetingController : MonoBehaviour, ITargeting, IPausible
@@ -28,6 +29,8 @@ namespace GMTK2021.Enemy
             get { return isTargetting; }
             set { isTargetting = value; }
         }
+
+        public Transform Target => mainTarget;
 
         public void InitialiseTargetingController()
         {

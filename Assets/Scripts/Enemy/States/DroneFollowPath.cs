@@ -8,6 +8,8 @@ namespace GMTK2021.Enemy.States
     {
         // Interfaces 
         private IMovementController movementController;
+        private IEnemySight enemySight;
+        private IStateManager stateManager;
 
         // Fields
         private Transform[] pointsOfInterest;
@@ -25,6 +27,8 @@ namespace GMTK2021.Enemy.States
             IEnemyInterestMarkers interestMarkers = this.GetComponent<IEnemyInterestMarkers>();
             pointsOfInterest = interestMarkers.GetPointsOfInterest();
             movementController = this.GetComponent<IMovementController>();
+            enemySight = this.GetComponent<IEnemySight>();
+            stateManager = this.GetComponent<IStateManager>();
 
             simpleTimer = new SimpleTimer(10, Time.deltaTime);
             droneTransform = transform;
@@ -34,6 +38,11 @@ namespace GMTK2021.Enemy.States
         private void FixedUpdate()
         {
             if (isPaused) return;
+
+            if (!enemySight.IsPercievable)
+            {
+                stateManager.AddState<DronePursuit>();
+            }
 
             CalculateDistanceToPoint();
             CalculateRotation();

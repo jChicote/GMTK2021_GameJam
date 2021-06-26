@@ -39,7 +39,7 @@ namespace GMTK2021.Enemy
 
             if (!isPercievable) return;
 
-            SearchForTarget();
+            //SearchForTarget();
         }
 
         public bool CheckIfWithinDetectionRange()
