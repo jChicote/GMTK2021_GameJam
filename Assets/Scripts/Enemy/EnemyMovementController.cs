@@ -8,6 +8,8 @@ namespace GMTK2021.Enemy
     {
         void AddForce(Vector3 force);
         void SetMovement(Vector3 velocity);
+        float TotalSqrMagnitude();
+        Vector3 GetVelocity();
     }
 
     public class EnemyMovementController : MonoBehaviour, IMovementController
@@ -25,6 +27,18 @@ namespace GMTK2021.Enemy
             totalVelocity += velocity;
             enemyRb.velocity = totalVelocity;
             totalVelocity = Vector3.zero;
+
+        }
+
+
+        public float TotalSqrMagnitude()
+        {
+            return totalVelocity.sqrMagnitude;
+        }
+
+        public Vector3 GetVelocity()
+        {
+            return enemyRb.velocity;
         }
     }
 
