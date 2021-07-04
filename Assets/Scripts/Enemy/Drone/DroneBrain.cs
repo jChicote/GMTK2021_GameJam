@@ -15,9 +15,9 @@ namespace GMTK2021.Enemy
         protected override void InitialiseEnemy()
         {
             InitialiseStateManager();
+            InitialiseSenses();
             InitialiseMovementControl();
             IntialiseWeaponControl();
-            InitialiseSenses();
         }
 
         protected override void InitialiseMovementControl()

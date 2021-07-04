@@ -21,6 +21,11 @@ namespace GMTK2021.Enemy
         void InitialiseSenses();
     }
 
+    public interface IWhiskers
+    {
+
+    }
+
     public class DroneSenses : MonoBehaviour, ISenses, IPausible, IEnemyInterestMarkers
     {
         public Transform[] pointsOfInterest;
@@ -96,6 +101,7 @@ namespace GMTK2021.Enemy
 
         private void OnDrawGizmos()
         {
+            if (pointsOfInterest == null) return;
             if (pointsOfInterest.Length == 0) return;
 
             foreach(Transform point in pointsOfInterest)
