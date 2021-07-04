@@ -8,6 +8,8 @@ namespace GMTK2021.Enemy
     {
         void AddForce(Vector3 force);
         void SetMovement(Vector3 velocity);
+        void DampenMovementVelocity(float dampenMultiplier);
+        void SetAngularVelocity(Vector3 angular);
         float TotalSqrMagnitude();
         Vector3 GetVelocity();
     }
@@ -15,7 +17,7 @@ namespace GMTK2021.Enemy
     public class EnemyMovementController : MonoBehaviour, IMovementController
     {
         [SerializeField] private Rigidbody enemyRb;
-        private Vector3 totalVelocity;
+        private Vector3 totalVelocity = Vector3.zero;
 
         public void AddForce(Vector3 force)
         {
@@ -27,9 +29,19 @@ namespace GMTK2021.Enemy
             totalVelocity += velocity;
             enemyRb.velocity = totalVelocity;
             totalVelocity = Vector3.zero;
-
         }
 
+        public void SetAngularVelocity(Vector3 angular)
+        {
+            enemyRb.angularVelocity = angular;
+        }
+
+        public void DampenMovementVelocity(float dampenMultiplier)
+        {
+            if (GetVelocity().magnitude <= 0) return;
+
+            enemyRb.velocity *= dampenMultiplier;
+        }
 
         public float TotalSqrMagnitude()
         {

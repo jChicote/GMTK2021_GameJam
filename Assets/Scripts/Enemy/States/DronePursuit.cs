@@ -10,6 +10,7 @@ namespace GMTK2021.Enemy.States
         private ITargeting targetingController;
         private IMovementController movementController;
         private IEnemySight enemySight;
+        private IStateManager stateManager;
         public float minimumApproachDistance = 8f;
         public float minimumHoverHeigh = 2f;
         public float orbitRadialDist = 6f;
@@ -27,12 +28,12 @@ namespace GMTK2021.Enemy.States
 
         private float relativeHoverHeight = 0;
 
-
         public override void BeginState()
         {
             movementController = this.GetComponent<IMovementController>();
             targetingController = this.GetComponent<ITargeting>();
             enemySight = this.GetComponent<IEnemySight>();
+            stateManager = this.GetComponent<IStateManager>();
             intervalTimer = new SimpleTimer(0.3f, Time.fixedDeltaTime);
         }
 
@@ -40,7 +41,7 @@ namespace GMTK2021.Enemy.States
         {
             if (isPaused) return;
 
-            DetermineDirection();
+            GetDirectionToTarget();
             CalculateTargetPosition();
             LevelDroneHeightToPlayer();
             FlyTowardsPlayer();
@@ -60,10 +61,16 @@ namespace GMTK2021.Enemy.States
                 return true;
             }
 
+            if (CalculatePlaneDistanceXZ() < minimumApproachDistance * minimumApproachDistance)
+            {
+                movementController.SetMovement(Vector3.zero);
+                stateManager.AddState<DroneAttack>();
+            }
+
             return false;
         }
 
-        private void DetermineDirection()
+        private void GetDirectionToTarget()
         {
             direction = lastTargetPosition - transform.position;
         }
